@@ -1,4 +1,4 @@
-// File: C:\Users\LenovoX240\Documents\New folder\8.21\ethvault\app\page.tsx
+// File: C:\c.projects\EthVault-QA-task1-jdw-PoW\ethvault\app\page.tsx
 import * as entry from '../../../app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
