@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+  "test": "playwright test",
+  "test:headed": "playwright test --headed",
+  "test:ci": "playwright test --reporter=line",
   "dev": "concurrently \"npm run backend\" \"next dev\"",
   "backend": "cd backend && node index.js",
   "start": "concurrently \"npm run backend\" \"next dev\""

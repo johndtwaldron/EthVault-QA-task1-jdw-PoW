@@ -1,0 +1,71 @@
+﻿2025-09-07T15:06:10.7933424Z ##[group]Run actions/checkout@v4
+2025-09-07T15:06:10.7934238Z with:
+2025-09-07T15:06:10.7934709Z   repository: johndtwaldron/EthVault-QA-task1-jdw-PoW
+2025-09-07T15:06:10.7935671Z   token: ***
+2025-09-07T15:06:10.7936181Z   ssh-strict: true
+2025-09-07T15:06:10.7936568Z   ssh-user: git
+2025-09-07T15:06:10.7936956Z   persist-credentials: true
+2025-09-07T15:06:10.7937385Z   clean: true
+2025-09-07T15:06:10.7937761Z   sparse-checkout-cone-mode: true
+2025-09-07T15:06:10.7938232Z   fetch-depth: 1
+2025-09-07T15:06:10.7938603Z   fetch-tags: false
+2025-09-07T15:06:10.7938983Z   show-progress: true
+2025-09-07T15:06:10.7939369Z   lfs: false
+2025-09-07T15:06:10.7939714Z   submodules: false
+2025-09-07T15:06:10.7940098Z   set-safe-directory: true
+2025-09-07T15:06:10.7940784Z env:
+2025-09-07T15:06:10.7941175Z   APP_URL: http://localhost:3000
+2025-09-07T15:06:10.7941625Z ##[endgroup]
+2025-09-07T15:06:10.8981851Z Syncing repository: johndtwaldron/EthVault-QA-task1-jdw-PoW
+2025-09-07T15:06:10.8983643Z ##[group]Getting Git version info
+2025-09-07T15:06:10.8984594Z Working directory is '/home/runner/work/EthVault-QA-task1-jdw-PoW/EthVault-QA-task1-jdw-PoW'
+2025-09-07T15:06:10.8986131Z [command]/usr/bin/git version
+2025-09-07T15:06:10.9058756Z git version 2.51.0
+2025-09-07T15:06:10.9083907Z ##[endgroup]
+2025-09-07T15:06:10.9103731Z Temporarily overriding HOME='/home/runner/work/_temp/dc0ebeba-5365-471d-b0ab-876690a12e3e' before making global git config changes
+2025-09-07T15:06:10.9105082Z Adding repository directory to the temporary git global config as a safe directory
+2025-09-07T15:06:10.9109079Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/EthVault-QA-task1-jdw-PoW/EthVault-QA-task1-jdw-PoW
+2025-09-07T15:06:10.9142838Z Deleting the contents of '/home/runner/work/EthVault-QA-task1-jdw-PoW/EthVault-QA-task1-jdw-PoW'
+2025-09-07T15:06:10.9146115Z ##[group]Initializing the repository
+2025-09-07T15:06:10.9150301Z [command]/usr/bin/git init /home/runner/work/EthVault-QA-task1-jdw-PoW/EthVault-QA-task1-jdw-PoW
+2025-09-07T15:06:10.9251152Z hint: Using 'master' as the name for the initial branch. This default branch name
+2025-09-07T15:06:10.9252560Z hint: is subject to change. To configure the initial branch name to use in all
+2025-09-07T15:06:10.9253816Z hint: of your new repositories, which will suppress this warning, call:
+2025-09-07T15:06:10.9254699Z hint:
+2025-09-07T15:06:10.9256075Z hint: 	git config --global init.defaultBranch <name>
+2025-09-07T15:06:10.9257069Z hint:
+2025-09-07T15:06:10.9258054Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2025-09-07T15:06:10.9259653Z hint: 'development'. The just-created branch can be renamed via this command:
+2025-09-07T15:06:10.9260919Z hint:
+2025-09-07T15:06:10.9261604Z hint: 	git branch -m <name>
+2025-09-07T15:06:10.9262418Z hint:
+2025-09-07T15:06:10.9263473Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2025-09-07T15:06:10.9265813Z Initialized empty Git repository in /home/runner/work/EthVault-QA-task1-jdw-PoW/EthVault-QA-task1-jdw-PoW/.git/
+2025-09-07T15:06:10.9269885Z [command]/usr/bin/git remote add origin https://github.com/johndtwaldron/EthVault-QA-task1-jdw-PoW
+2025-09-07T15:06:10.9307070Z ##[endgroup]
+2025-09-07T15:06:10.9308287Z ##[group]Disabling automatic garbage collection
+2025-09-07T15:06:10.9311751Z [command]/usr/bin/git config --local gc.auto 0
+2025-09-07T15:06:10.9340164Z ##[endgroup]
+2025-09-07T15:06:10.9341366Z ##[group]Setting up auth
+2025-09-07T15:06:10.9347918Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-09-07T15:06:10.9377862Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-09-07T15:06:10.9798286Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-09-07T15:06:10.9827942Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-09-07T15:06:11.0043045Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-09-07T15:06:11.0077346Z ##[endgroup]
+2025-09-07T15:06:11.0078623Z ##[group]Fetching the repository
+2025-09-07T15:06:11.0086621Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +6836d76cab7b54ad355cfae2f5c42207a810a51e:refs/remotes/origin/main
+2025-09-07T15:06:13.4256217Z From https://github.com/johndtwaldron/EthVault-QA-task1-jdw-PoW
+2025-09-07T15:06:13.4257875Z  * [new ref]         6836d76cab7b54ad355cfae2f5c42207a810a51e -> origin/main
+2025-09-07T15:06:13.4287222Z ##[endgroup]
+2025-09-07T15:06:13.4289225Z ##[group]Determining the checkout info
+2025-09-07T15:06:13.4291500Z ##[endgroup]
+2025-09-07T15:06:13.4295066Z [command]/usr/bin/git sparse-checkout disable
+2025-09-07T15:06:13.4335007Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2025-09-07T15:06:13.4363244Z ##[group]Checking out the ref
+2025-09-07T15:06:13.4367025Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2025-09-07T15:06:13.7908545Z Switched to a new branch 'main'
+2025-09-07T15:06:13.7910269Z branch 'main' set up to track 'origin/main'.
+2025-09-07T15:06:13.7948704Z ##[endgroup]
+2025-09-07T15:06:13.7986073Z [command]/usr/bin/git log -1 --format=%H
+2025-09-07T15:06:13.8009768Z 6836d76cab7b54ad355cfae2f5c42207a810a51e

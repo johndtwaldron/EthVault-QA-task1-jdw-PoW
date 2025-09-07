@@ -1,0 +1,66 @@
+﻿2025-09-07T15:06:18.5997698Z ##[group]Run npm ci || npm install
+2025-09-07T15:06:18.5998082Z [36;1mnpm ci || npm install[0m
+2025-09-07T15:06:18.6300546Z shell: /usr/bin/bash -e {0}
+2025-09-07T15:06:18.6300829Z env:
+2025-09-07T15:06:18.6301045Z   APP_URL: http://localhost:3000
+2025-09-07T15:06:18.6301284Z ##[endgroup]
+2025-09-07T15:06:24.0378208Z npm error code EUSAGE
+2025-09-07T15:06:24.0378709Z npm error
+2025-09-07T15:06:24.0379347Z npm error The `npm ci` command can only install with an existing package-lock.json or
+2025-09-07T15:06:24.0380214Z npm error npm-shrinkwrap.json with lockfileVersion >= 1. Run an install with npm@5 or
+2025-09-07T15:06:24.0380963Z npm error later to generate a package-lock.json file, then try again.
+2025-09-07T15:06:24.0381432Z npm error
+2025-09-07T15:06:24.0381749Z npm error Clean install a project
+2025-09-07T15:06:24.0382055Z npm error
+2025-09-07T15:06:24.0382277Z npm error Usage:
+2025-09-07T15:06:24.0382546Z npm error npm ci
+2025-09-07T15:06:24.0382769Z npm error
+2025-09-07T15:06:24.0383013Z npm error Options:
+2025-09-07T15:06:24.0383617Z npm error [--install-strategy <hoisted|nested|shallow|linked>] [--legacy-bundling]
+2025-09-07T15:06:24.0384441Z npm error [--global-style] [--omit <dev|optional|peer> [--omit <dev|optional|peer> ...]]
+2025-09-07T15:06:24.0385253Z npm error [--include <prod|dev|optional|peer> [--include <prod|dev|optional|peer> ...]]
+2025-09-07T15:06:24.0386236Z npm error [--strict-peer-deps] [--foreground-scripts] [--ignore-scripts] [--no-audit]
+2025-09-07T15:06:24.0387089Z npm error [--no-bin-links] [--no-fund] [--dry-run]
+2025-09-07T15:06:24.0387723Z npm error [-w|--workspace <workspace-name> [-w|--workspace <workspace-name> ...]]
+2025-09-07T15:06:24.0388276Z npm error [-ws|--workspaces] [--include-workspace-root] [--install-links]
+2025-09-07T15:06:24.0388626Z npm error
+2025-09-07T15:06:24.0388975Z npm error aliases: clean-install, ic, install-clean, isntall-clean
+2025-09-07T15:06:24.0389309Z npm error
+2025-09-07T15:06:24.0389636Z npm error Run "npm help ci" for more info
+2025-09-07T15:06:24.0390715Z npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2025-09-07T15_06_18_693Z-debug-0.log
+2025-09-07T15:06:42.4115011Z npm warn ERESOLVE overriding peer dependency
+2025-09-07T15:06:42.4302134Z npm warn ERESOLVE overriding peer dependency
+2025-09-07T15:06:50.1081775Z npm warn ERESOLVE overriding peer dependency
+2025-09-07T15:06:53.6257589Z npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+2025-09-07T15:06:53.6903320Z npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+2025-09-07T15:06:53.7254811Z npm warn deprecated gauge@4.0.4: This package is no longer supported.
+2025-09-07T15:06:53.7389460Z npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+2025-09-07T15:06:53.7650018Z npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+2025-09-07T15:06:53.7766118Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2025-09-07T15:06:53.7964678Z npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+2025-09-07T15:06:53.9621557Z npm warn deprecated har-validator@5.1.5: this library is no longer supported
+2025-09-07T15:06:54.1943703Z npm warn deprecated deferred-leveldown@0.2.0: Superseded by abstract-level (https://github.com/Level/community#faq)
+2025-09-07T15:06:54.6296518Z npm warn deprecated abstract-leveldown@0.12.4: Superseded by abstract-level (https://github.com/Level/community#faq)
+2025-09-07T15:06:54.8262706Z npm warn deprecated q@1.5.1: You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
+2025-09-07T15:06:54.8264478Z npm warn deprecated
+2025-09-07T15:06:54.8264978Z npm warn deprecated (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
+2025-09-07T15:06:54.8798175Z npm warn deprecated level-js@2.2.4: Superseded by browser-level (https://github.com/Level/community#faq)
+2025-09-07T15:06:55.4636547Z npm warn deprecated request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142
+2025-09-07T15:06:55.5945984Z npm warn deprecated levelup@0.18.6: Superseded by abstract-level (https://github.com/Level/community#faq)
+2025-09-07T15:06:55.7507156Z npm warn deprecated object-keys@0.2.0: Please update to the latest object-keys
+2025-09-07T15:06:55.9202316Z npm warn deprecated uuid@3.4.0: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+2025-09-07T15:07:11.3851357Z 
+2025-09-07T15:07:11.3852260Z added 665 packages, and audited 666 packages in 47s
+2025-09-07T15:07:11.3852657Z 
+2025-09-07T15:07:11.3852886Z 83 packages are looking for funding
+2025-09-07T15:07:11.3853222Z   run `npm fund` for details
+2025-09-07T15:07:11.4327684Z 
+2025-09-07T15:07:11.4328251Z 10 vulnerabilities (3 moderate, 5 high, 2 critical)
+2025-09-07T15:07:11.4328679Z 
+2025-09-07T15:07:11.4329107Z To address all issues possible, run:
+2025-09-07T15:07:11.4329604Z   npm audit fix --force
+2025-09-07T15:07:11.4329855Z 
+2025-09-07T15:07:11.4330184Z Some issues need review, and may require choosing
+2025-09-07T15:07:11.4330746Z a different dependency.
+2025-09-07T15:07:11.4331003Z 
+2025-09-07T15:07:11.4331269Z Run `npm audit` for details.

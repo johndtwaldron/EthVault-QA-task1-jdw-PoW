@@ -1,0 +1,12 @@
+﻿2025-09-07T15:10:14.8024939Z ##[group]Run npm run test:ci
+2025-09-07T15:10:14.8025266Z [36;1mnpm run test:ci[0m
+2025-09-07T15:10:14.8056394Z shell: /usr/bin/bash -e {0}
+2025-09-07T15:10:14.8056620Z env:
+2025-09-07T15:10:14.8056816Z   APP_URL: http://localhost:3000
+2025-09-07T15:10:14.8057052Z ##[endgroup]
+2025-09-07T15:10:14.9361613Z npm error Missing script: "test:ci"
+2025-09-07T15:10:14.9362188Z npm error
+2025-09-07T15:10:14.9362646Z npm error To see a list of scripts, run:
+2025-09-07T15:10:14.9363146Z npm error   npm run
+2025-09-07T15:10:14.9380893Z npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2025-09-07T15_10_14_865Z-debug-0.log
+2025-09-07T15:10:14.9432872Z ##[error]Process completed with exit code 1.
