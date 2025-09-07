@@ -1,0 +1,6 @@
+ID,Area,Scenario,Steps,Expected,Actual,Status,Type,Severity
+TC-001,Dashboard,No-wallet balance display,"Open / with no wallet connected","Balances show — or 0.00; helper suggests connecting wallet","NaN displayed",Fail,Functional,P2
+TC-002,Wallet,Connect Wallet error handling,"Click Connect Wallet; observe behaviour","Wallet selection modal appears; user can proceed/cancel; no dev overlay errors","Dev overlay shows 'Unexpected error'; flow blocked",Fail,Functional,P1
+TC-003,Governance,Empty state resilience,"Open /governance with zero proposals","Shows 'No proposals yet' + CTA/instructions","Large blank area; no CTA",Fail,Functional,P1
+TC-004,Dashboard,Refresh action feedback,"Click Refresh near balances before connecting wallet","Control disabled or shows hint; no action if preconditions missing","No feedback; no state change; still NaN",Fail,UX,P2
+TC-005,Performance,Perceived loading on first paint,"Cold start app; open /","Skeletons or progress indicator until data ready; first paint reasonable","~20s before content; no skeletons",Fail,Performance,P2
