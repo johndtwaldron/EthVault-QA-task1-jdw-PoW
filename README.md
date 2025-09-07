@@ -17,3 +17,20 @@ Install & run:
 ```bash
 npm install
 APP_URL=http://localhost:3000 npx playwright test --reporter=line
+
+### CI status (Sept 7, 2025)
+- Initial CI failed: `playwright: not found` → @playwright/test was not installed.
+- Fixed by installing dev dependency and committing lockfile.
+- Updated workflow to skip e2e unless APP_URL secret is present (since localhost is not reachable from GitHub runners).
+
+---
+
+### Playwright smoke (Sept 7, 2025)
+- Local APP_URL: http://localhost:3000
+- Initial failure: strict mode (duplicate 'Dashboard' links header/footer).
+- Fix: scope to header `<nav>` using page.getByRole('navigation').getByRole('link', …).
+- Current tests:
+  1) Connect Wallet button visible — PASS
+  2) Nav tabs render (scoped to header) — PASS
+  3) NaN visible before wallet connect — PASS (documents known bug)
+- Tip: Use `--reporter=html` then `show-report` to view HTML report.
