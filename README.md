@@ -34,3 +34,9 @@ APP_URL=http://localhost:3000 npx playwright test --reporter=line
   2) Nav tabs render (scoped to header) — PASS
   3) NaN visible before wallet connect — PASS (documents known bug)
 - Tip: Use `--reporter=html` then `show-report` to view HTML report.
+
+### Repo hygiene (Sept 7, 2025)
+- Added .gitignore for Next.js & Playwright artifacts.
+- Removed tracked build outputs (.next, playwright-report, test-results) via `git rm --cached`.
+- Committed smoke tests + README updates.
+- CI configured to skip e2e unless APP_URL secret is set (local dev is not reachable by GitHub runners).

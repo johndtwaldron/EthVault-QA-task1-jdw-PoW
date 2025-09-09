@@ -1,7 +1,4 @@
 {
   "/page": "app/page.js",
-  "/deposit/page": "app/deposit/page.js",
-  "/stake/page": "app/stake/page.js",
-  "/leaderboard/page": "app/leaderboard/page.js",
-  "/governance/page": "app/governance/page.js"
+  "/stake/page": "app/stake/page.js"
 }
