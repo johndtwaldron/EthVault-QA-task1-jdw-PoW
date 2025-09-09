@@ -4,7 +4,7 @@
 **Host (dev):** Windows 11  
 **Node/npm:** v20.x / npm 10.x
 
-These notes explain how to run the app locally, execute tests, see reports/artifacts, and what CI does. This file is the canonical reference for reviewers.
+My notes making sense of how I explored the task, to run the app locally, execute tests, see reports/artifacts, and what CI does. This file is the canonical reference for reviewers.
 
 ---
 
