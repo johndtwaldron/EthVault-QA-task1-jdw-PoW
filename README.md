@@ -18,8 +18,8 @@ This repo contains my ETHVault QA submission:
 
 ## Quick Links (insert before sending)
 
-- **Bug Report (Google Doc):** <[https://docs.google.com/document/d/<DOC_ID>](https://docs.google.com/document/d/1naPqSPKy_cs108TmY0DRqz_3H_6P0e8Hfll4QZgOn-4/edit?usp=sharing)>
-- **Test Cases (Google Sheet):** [<https://docs.google.com/spreadsheets/d/<SHEET_ID>](https://docs.google.com/spreadsheets/d/1K0agO-u27PN_9pDa9kyOrv4a1Wvghz9tyJ5YR62NALM/edit?gid=0#gid=0)>
+- **Bug Report (Google Doc):** <[JDW EthVault BugReport GoogleDoc Link](https://docs.google.com/document/d/1naPqSPKy_cs108TmY0DRqz_3H_6P0e8Hfll4QZgOn-4/edit?usp=sharing)>
+- **Test Cases (Google Sheet):** [JDW EthVault TestCases GoogleSheet Link](https://docs.google.com/spreadsheets/d/1K0agO-u27PN_9pDa9kyOrv4a1Wvghz9tyJ5YR62NALM/edit?gid=0#gid=0)>
 - **Loom Walkthrough:** <TBD>
 
 ---
