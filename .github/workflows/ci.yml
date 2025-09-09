@@ -1,28 +1,60 @@
-name: CI
+name: e2e
 
 on:
   push:
   pull_request:
 
 jobs:
-  e2e:
+  playwright-e2e:
     runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.47.0-jammy
+
+    # IMPORTANT: your app is in the ethvault subfolder
+    defaults:
+      run:
+        working-directory: ./ethvault
+
+    services:
+      mongo:
+        image: mongo:7
+        ports: ["27017:27017"]
+        options: >-
+          --health-cmd="mongosh --eval 'db.adminCommand({ ping: 1 })'"
+          --health-interval=10s --health-timeout=5s --health-retries=12
+
+    env:
+      NODE_ENV: test
+      APP_URL: http://127.0.0.1:3000
+      MONGODB_URI: mongodb://mongo:27017/ethvault
+      SENDGRID_API_KEY: test
+      CLOUDINARY_CLOUD_NAME: test
+      CLOUDINARY_API_KEY: test
+      CLOUDINARY_API_SECRET: test
 
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      # quick visibility to avoid "wrong folder" or "missing file" confusion
+      - run: pwd && ls -la
+
+      - run: node -v && npm -v
+      - run: npm ci
+      - run: npx playwright install --with-deps
+
+      # Start your dev server and run Playwright tests (no build step)
+      - run: npm run test:ui:local
+
+      # Upload reports for debugging no matter what
+      - if: ${{ always() }}
+        uses: actions/upload-artifact@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          name: playwright-report
+          path: ethvault/playwright-report
+          if-no-files-found: ignore
 
-      - name: Install deps (lockfile enforced)
-        run: npm ci
-
-      - name: Build Next.js
-        run: npm run build
-
-      - name: Run E2E (boot backend+Next and test)
-        env:
-          CI: true
-        run: npm run ci:e2e
+      - if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: ethvault/test-results
+          if-no-files-found: ignore
