@@ -1,6 +1,6 @@
 # ETHVault – QA Assessment (PoW) · John Waldron
 
-[![e2e](https://github.com/johndtwaldron/EthVault-QA-task1-jdw-PoW/actions/workflows/ci.yml/badge.svg)](https://github.com/<GITHUB_USER_OR_ORG>/<REPO_NAME>/actions/workflows/ci.yml)
+[![e2e](https://github.com/johndtwaldron/EthVault-QA-task1-jdw-PoW/actions/workflows/ci.yml/badge.svg)](https://github.com/johndtwaldron/EthVault-QA-task1-jdw-PoW/actions/workflows/ci.yml)
 <br>
 > **Repo:** `johndtwaldron/EthVault-QA-task1-jdw-PoW`
 **Latest green CI run:** <https://github.com/johndwaldron/EthVault-QA-task1-jdw-PoW/actions/runs/<RUN_ID>>
