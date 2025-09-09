@@ -38,7 +38,15 @@ jobs:
 
       # Start dev server and run Playwright without needing a script in package.json
       # - run: npx -y start-server-and-test "npm run dev" http://127.0.0.1:3000 "npx playwright test"
-      - run: npx playwright test
+      - run: npx playwright test -c playwright.ci.config.ts
+        env:
+          NODE_ENV: test
+          NEXT_TELEMETRY_DISABLED: "1"
+          # These stubs satisfy libs that check format; they DO NOT send anything.
+          SENDGRID_API_KEY: SG.fake_ci_key_for_tests
+          CLOUDINARY_URL: cloudinary://key:secret@cloudname
+          DEBUG: pw:webServer
+
 
       # artifacts
       - if: ${{ always() }}
