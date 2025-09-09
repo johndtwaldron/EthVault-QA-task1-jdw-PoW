@@ -7,34 +7,22 @@ on:
 jobs:
   e2e:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '20'
           cache: 'npm'
 
-      # Deterministic install, but fall back to npm install if lockfile mismatch sneaks in.
-      - name: Install dependencies (lockfile-aware)
-        run: |
-          npm ci || (echo "npm ci failed (likely lockfile drift). Falling back to npm install..." && npm install --no-audit --no-fund)
+      - name: Install deps (lockfile enforced)
+        run: npm ci
 
-      - name: Run E2E (start server + Playwright)
+      - name: Build Next.js
+        run: npm run build
+
+      - name: Run E2E (boot backend+Next and test)
         env:
-          # Lets Playwright use the same URL if your config reads APP_URL
-          APP_URL: http://127.0.0.1:3000
-        run: |
-          npm run ci:e2e
-
-      - name: Upload Playwright HTML report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report
-          path: playwright-report
-          retention-days: 7
+          CI: true
+        run: npm run ci:e2e
