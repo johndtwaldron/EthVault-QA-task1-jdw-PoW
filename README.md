@@ -56,11 +56,14 @@ This repo contains my ETHVault QA submission:
 │  ├─ api.ping.test.mjs             # Mocha API probe (local)
 │  ├─ selenium.smoke.test.mjs       # Selenium smoke (local)
 │  └─ selenium_probe.mjs            # Selenium sanity (local)
-├─ docs/                            # Submission docs
+├─ Docs
+│  ├─<snapshots>.json               #  see below
+│  └─ snapshot-*.{txt,json}         # node/npm, npm ls, scripts/bin snapshots
+├─ SUBMISSION_JDW_QA_NOTES/         # Submission docs notes
 │  ├─ RUN_NOTES.md
 │  ├─ BUGS.md
 │  ├─ TESTCASES.csv
-│  └─ snapshot-*.{txt,json}         # node/npm, npm ls, scripts/bin snapshots
+│  
 ├─ .github/
 │  └─ workflows/
 │     └─ ci.yml                     # GitHub Actions (Playwright container)
