@@ -3,6 +3,8 @@
     "dev": "concurrently \"npm run backend\" \"next dev\"",
     "backend": "cd backend && node index.js",
 
+    "ci:e2e": "start-server-and-test start:prod http://127.0.0.1:3000 \"playwright install --with-deps && playwright test --reporter=line\"",
+
     "build": "next build",
     "start:prod": "concurrently \"cd backend && node index.js\" \"next start -p 3000\"",
 
