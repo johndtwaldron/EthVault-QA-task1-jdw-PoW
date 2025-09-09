@@ -20,10 +20,11 @@ jobs:
       NODE_ENV: test
       APP_URL: http://127.0.0.1:3000
       MONGODB_URI: mongodb://mongo:27017/ethvault
-      SENDGRID_API_KEY: test
+      SENDGRID_API_KEY: SG.fake_ci_key_just_for_tests     # <-- change this
       CLOUDINARY_CLOUD_NAME: test
       CLOUDINARY_API_KEY: test
       CLOUDINARY_API_SECRET: test
+      NEXT_TELEMETRY_DISABLED: "1"
 
     steps:
       - uses: actions/checkout@v4
@@ -36,7 +37,8 @@ jobs:
       - run: npx playwright install --with-deps
 
       # Start dev server and run Playwright without needing a script in package.json
-      - run: npx -y start-server-and-test "npm run dev" http://127.0.0.1:3000 "npx playwright test"
+      # - run: npx -y start-server-and-test "npm run dev" http://127.0.0.1:3000 "npx playwright test"
+      - run: npx playwright test
 
       # artifacts
       - if: ${{ always() }}
