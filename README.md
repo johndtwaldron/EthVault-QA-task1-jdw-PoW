@@ -27,47 +27,41 @@ This repo contains my ETHVault QA submission:
 ---
 
 ## 📁 Repo Map
-app/, backend/, components/, public/, styles/ # app sources
-tests/ # automation (Playwright TS, Mocha .mjs, Selenium)
-docs/ # RUN_NOTES.md, BUGS.md, TESTCASES.csv, snapshots
-.github/workflows/ci.yml # GitHub Actions (Playwright container)
-playwright.ci.config.ts # CI-only Playwright config (Next-only server)
-
 <details>
-  <summary><b>📁 Repo Map</b> (click to expand)</summary>
+  <summary><b> Directory layout </b> (click to expand)</summary>
 
 ```text
 / (repo root)
-├─ app/                          # Next.js app routes/pages
-├─ backend/                      # Express API (SendGrid/Cloudinary/Mongo wiring)
+├─ app/                             # Next.js app routes/pages
+├─ backend/                         # Express API (SendGrid/Cloudinary/Mongo wiring)
 │  ├─ index.js
 │  ├─ app.js
 │  ├─ controllers/
 │  ├─ routes/
 │  ├─ models/
 │  └─ utils/
-├─ components/                   # UI components (Radix, shadcn, etc.)
-├─ contracts/                    # Solidity artifacts (if any)
-├─ hooks/                        # React hooks
-├─ lib/                          # Client utilities
-├─ public/                       # Static assets
-├─ styles/                       # Tailwind / CSS
-├─ tests/                        # Automation
+├─ components/                      # UI components (Radix, shadcn, etc.)
+├─ contracts/                       # Solidity artifacts (if any)
+├─ hooks/                           # React hooks
+├─ lib/                             # Client utilities
+├─ public/                          # Static assets
+├─ styles/                          # Tailwind / CSS
+├─ tests/                           # Automation
 │  ├─ ui-smoke.spec.ts              # Playwright UI smoke (CI)
 │  ├─ dashboard-preconnect.spec.ts  # Playwright UI
 │  ├─ api.ping.test.mjs             # Mocha API probe (local)
 │  ├─ selenium.smoke.test.mjs       # Selenium smoke (local)
 │  └─ selenium_probe.mjs            # Selenium sanity (local)
-├─ docs/                         # Submission docs
+├─ docs/                            # Submission docs
 │  ├─ RUN_NOTES.md
 │  ├─ BUGS.md
 │  ├─ TESTCASES.csv
-│  └─ snapshot-*.{txt,json}        # node/npm, npm ls, scripts/bin snapshots
+│  └─ snapshot-*.{txt,json}         # node/npm, npm ls, scripts/bin snapshots
 ├─ .github/
 │  └─ workflows/
-│     └─ ci.yml                   # GitHub Actions (Playwright container)
-├─ playwright.ci.config.ts       # CI-only Playwright config (Next-only server)
-├─ playwright.config.ts          # Local Playwright config (if present)
+│     └─ ci.yml                     # GitHub Actions (Playwright container)
+├─ playwright.ci.config.ts          # CI-only Playwright config (Next-only server)
+├─ playwright.config.ts             # Local Playwright config (if present)
 ├─ README.md
 ├─ package.json
 └─ package-lock.json
@@ -75,9 +69,6 @@ playwright.ci.config.ts # CI-only Playwright config (Next-only server)
 
 ```
 </details>
-
-
-
 ---
 
 ## Local Run (App)
