@@ -6,14 +6,19 @@ package-lock.json
 # Next.js
 .next/
 out/
+*.log
 
 # Playwright
 playwright-report/
 test-results/
+blob-report/
 
 # Env
 .env
 .env.local
+
+# Selenium
+chromedriver.log
 
 # OS
 .DS_Store
