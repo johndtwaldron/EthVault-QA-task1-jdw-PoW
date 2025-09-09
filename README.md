@@ -1,16 +1,15 @@
 # ETHVault – QA Assessment (PoW) · John Waldron
 
-[![e2e](https://github.com/<GITHUB_USER_OR_ORG>/<REPO_NAME>/actions/workflows/ci.yml/badge.svg)](https://github.com/<GITHUB_USER_OR_ORG>/<REPO_NAME>/actions/workflows/ci.yml)
+[![e2e](https://github.com/johndtwaldron/EthVault-QA-task1-jdw-PoW/actions/workflows/ci.yml/badge.svg)](https://github.com/<GITHUB_USER_OR_ORG>/<REPO_NAME>/actions/workflows/ci.yml)
 <br>
-**Public repo:** <https://github.com/<GITHUB_USER_OR_ORG>/<REPO_NAME>>  
-**Latest green CI run:** <https://github.com/<GITHUB_USER_OR_ORG>/<REPO_NAME>/actions/runs/<RUN_ID>>
+> **Repo:** `johndtwaldron/EthVault-QA-task1-jdw-PoW`
+**Latest green CI run:** <https://github.com/johndwaldron/EthVault-QA-task1-jdw-PoW/actions/runs/<RUN_ID>>
 
 ---
 
 ## Overview
 
 This repo contains my ETHVault QA submission:
-- **Stabilized local dev** on Windows (fixed EPERM/registry/tarball issues, captured dependency snapshots).
 - **Automation:** Playwright UI smoke (CI) + local API probe (Mocha) + local Selenium smoke.
 - **Docs:** Bug log (≥5), test cases, run notes.
 - **CI:** GitHub Actions using official Playwright container; CI-only config starts **Next.js only** (no backend), uploads reports.
@@ -19,13 +18,13 @@ This repo contains my ETHVault QA submission:
 
 ## Quick Links (insert before sending)
 
-- **Bug Report (Google Doc):** <https://docs.google.com/document/d/<DOC_ID>>
-- **Test Cases (Google Sheet):** <https://docs.google.com/spreadsheets/d/<SHEET_ID>>
-- **Loom Walkthrough:** <https://www.loom.com/share/<VIDEO_ID>>
+- **Bug Report (Google Doc):** <[https://docs.google.com/document/d/<DOC_ID>](https://docs.google.com/document/d/1naPqSPKy_cs108TmY0DRqz_3H_6P0e8Hfll4QZgOn-4/edit?usp=sharing)>
+- **Test Cases (Google Sheet):** [<https://docs.google.com/spreadsheets/d/<SHEET_ID>](https://docs.google.com/spreadsheets/d/1K0agO-u27PN_9pDa9kyOrv4a1Wvghz9tyJ5YR62NALM/edit?gid=0#gid=0)>
+- **Loom Walkthrough:** <TBD>
 
 ---
 
-## Repo Map
+## 📁 Repo Map
 app/, backend/, components/, public/, styles/ # app sources
 tests/ # automation (Playwright TS, Mocha .mjs, Selenium)
 docs/ # RUN_NOTES.md, BUGS.md, TESTCASES.csv, snapshots
@@ -43,16 +42,17 @@ playwright.ci.config.ts # CI-only Playwright config (Next-only server)
 npm install
 npm run dev
 # browse http://localhost:3000
-
+```
 
 If you need environment variables for backend locally, use backend/.env (kept out of Git).
 
-Local Tests
+# Local Tests
+```bash
 Playwright (UI)
 # against a running dev server
 npm run test:ui
 
-API Probe (Mocha)
+# API Probe (Mocha)
 npm run test:api
 
 Selenium Smoke (Chromedriver v140)
@@ -61,25 +61,24 @@ Selenium Smoke (Chromedriver v140)
 $env:CHROME_BIN="C:\Program Files\Google\Chrome\Application\chrome.exe"
 $env:HEADLESS="false"
 npm run test:selenium
+```
 
-
-Artifacts (local):
+# Artifacts (local):
 
 playwright-report/ – HTML report
 
 test-results/ – screenshots & chromedriver.log
 
-CI (GitHub Actions)
+---
+
+## CI (GitHub Actions)
 
 Workflow: .github/workflows/ci.yml
-
 Runs inside: mcr.microsoft.com/playwright:v1.47.0-jammy
-
 Steps:
-
+```bash
 npm ci
-
-Install Playwright deps: npx playwright install --with-deps
+# Install Playwright deps: npx playwright install --with-deps
 
 Run tests: npx playwright test -c playwright.ci.config.ts
 
@@ -100,11 +99,8 @@ Artifacts uploaded from each run:
 playwright-report (HTML)
 
 test-results (screenshots/logs)
-
-Open the latest green run here: <https://github.com/
-<GITHUB_USER_OR_ORG>/<REPO_NAME>/actions>
-
-Documents (in docs/)
+```
+# Documents (in docs/)
 
 RUN_NOTES.md — local setup & commands
 
@@ -114,35 +110,10 @@ TESTCASES.csv — 5 cases (functional / UX / perf) ready for import to Sheets
 
 snapshot-*.txt/json — Node/npm versions, npm ls, scripts, binaries
 
-Add public links here once created:
 
-Bug Report (Google Doc): <https://docs.google.com/document/d/
-<DOC_ID>>
 
-Test Cases (Google Sheet): <https://docs.google.com/spreadsheets/d/
-<SHEET_ID>>
-
-How to Reproduce CI Locally (optional)
-# run just like CI would (server + UI tests)
-npx playwright install
-npx playwright test -c playwright.ci.config.ts
-
-Notes & Improvements
+## Summary Notes & Improvements
 
 Found issues include: NaN balances pre-connect, wallet connect error overlay, governance empty state, no skeletons on cold start, refresh button UX. See docs/BUGS.md.
 
 Next steps (post-assessment): extend Playwright coverage for auth/wallet edge cases, governance actions; add Gitpod or Docker Compose dev env.
-
-Submission
-
-Public repo: <https://github.com/
-<GITHUB_USER_OR_ORG>/<REPO_NAME>>
-
-Bug report (Doc): <https://docs.google.com/document/d/
-<DOC_ID>>
-
-Test cases (Sheet): <https://docs.google.com/spreadsheets/d/
-<SHEET_ID>>
-
-Loom video: <https://www.loom.com/share/
-<VIDEO_ID>>
