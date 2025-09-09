@@ -9,11 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     container: mcr.microsoft.com/playwright:v1.47.0-jammy
 
-    # IMPORTANT: your app is in the ethvault subfolder
-    defaults:
-      run:
-        working-directory: ./ethvault
-
     services:
       mongo:
         image: mongo:7
@@ -34,27 +29,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # quick visibility to avoid "wrong folder" or "missing file" confusion
+      # sanity: show we're at repo root (should list app/, backend/, components/, etc.)
       - run: pwd && ls -la
 
       - run: node -v && npm -v
       - run: npm ci
       - run: npx playwright install --with-deps
 
-      # Start your dev server and run Playwright tests (no build step)
+      # start dev server + run Playwright (your local pattern)
       - run: npm run test:ui:local
 
-      # Upload reports for debugging no matter what
+      # always upload reports from repo root (no ethvault/ prefix)
       - if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
-          path: ethvault/playwright-report
+          path: playwright-report
           if-no-files-found: ignore
 
       - if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: ethvault/test-results
+          path: test-results
           if-no-files-found: ignore
