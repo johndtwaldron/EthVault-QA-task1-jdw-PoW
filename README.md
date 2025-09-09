@@ -5,7 +5,11 @@
 
 > **Repo:** `johndtwaldron/EthVault-QA-task1-jdw-PoW`
 
-**Latest green CI run:** <https://github.com/johndwaldron/EthVault-QA-task1-jdw-PoW/actions/runs/<RUN_ID>>
+**Workflow runs (main):**  
+<https://github.com/johndtwaldron/EthVault-QA-task1-jdw-PoW/actions/workflows/ci.yml?query=branch%3Amain>
+
+**Latest successful runs:**  
+<https://github.com/johndtwaldron/EthVault-QA-task1-jdw-PoW/actions/workflows/ci.yml?query=branch%3Amain+is%3Asuccess>
 
 ---
 
@@ -100,17 +104,30 @@ $env:HEADLESS="false"
 npm run test:selenium
 ```
 
-# Artifacts (local):
+## Reports & Artifacts
 
-playwright-report/ – HTML report
+### Playwright (UI tests)
+- **What gets created**
+  - `playwright-report/` → **HTML report** for the last run.
+    - Entry point: `playwright-report/index.html`
+  - `test-results/**/trace.zip` → Playwright **trace** files (because config uses `trace: 'on-first-retry'`).
 
-test-results/ – screenshots & chromedriver.log
+- **How it’s generated**
+  - Config sets the reporter to HTML (see `playwright.ci.config.ts`).
+  - Any `npx playwright test` run will regenerate the folder.
 
+- **How to view locally**
+  ```bash
+  # open the report in your default browser
+  npx playwright show-report
+  # or manually open: ./playwright-report/index.html
+  ```
 ---
 
 ## CI (GitHub Actions)
 
-Workflow: .github/workflows/ci.yml
+**CI workflow file:**  
+[.github/workflows/ci.yml](.github/workflows/ci.yml)
 Runs inside: mcr.microsoft.com/playwright:v1.47.0-jammy
 Steps:
 ```bash
@@ -139,17 +156,17 @@ test-results (screenshots/logs)
 ```
 # Documents (in docs/)
 
-RUN_NOTES.md — local setup & commands
+RUN_NOTES.md — notes on local setup & commands
 
 BUGS.md — ≥5 issues with Severity, Repro, Expected vs Actual, Evidence
 
 TESTCASES.csv — 5 cases (functional / UX / perf) ready for import to Sheets
 
-snapshot-*.txt/json — Node/npm versions, npm ls, scripts, binaries
+snapshot-*.txt/json — Node/npm versions, npm ls, scripts, binaries (debugging local env)
 
 
 
-## Summary Notes & Improvements
+## JDW Quick Summary Notes & Improvements
 
 Found issues include: NaN balances pre-connect, wallet connect error overlay, governance empty state, no skeletons on cold start, refresh button UX. See docs/BUGS.md.
 
