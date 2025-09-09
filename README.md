@@ -154,7 +154,7 @@ playwright-report (HTML)
 
 test-results (screenshots/logs)
 ```
-# Documents (in docs/)
+# JDW Notes (./SUBMISSION_JDW_QA_NOTES)
 
 RUN_NOTES.md — notes on local setup & commands
 
@@ -162,9 +162,11 @@ BUGS.md — ≥5 issues with Severity, Repro, Expected vs Actual, Evidence
 
 TESTCASES.csv — 5 cases (functional / UX / perf) ready for import to Sheets
 
-snapshot-*.txt/json — Node/npm versions, npm ls, scripts, binaries (debugging local env)
+# docs (./docs) 
 
+snapshots e.g. -*.txt/json — Node/npm versions, npm ls, scripts, binaries (debugging local env)
 
+---
 
 ## JDW Quick Summary Notes & Improvements
 
