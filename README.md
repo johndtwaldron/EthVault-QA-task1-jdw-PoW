@@ -132,6 +132,11 @@ npm run test:selenium
 **CI workflow file:**  
 [.github/workflows/ci.yml](.github/workflows/ci.yml)
 Runs inside: mcr.microsoft.com/playwright:v1.47.0-jammy
+
+> **Note:** CI runs `npx playwright test -c playwright.ci.config.ts`, which starts **Next.js only** for UI tests.  
+> The local config (`playwright.config.ts`) includes a `webServer` branch for `CI`, but it is **not used** in GitHub Actions because we pass the CI-specific config explicitly.
+
+
 Steps:
 ```bash
 npm ci

@@ -1,102 +1,139 @@
-EthVault QA PoW – Setup Notes (7 Sept 2025)
-Node & NVM Setup
+# RUN NOTES — ETHVault (Local & CI)
 
-Installed Node v20.19.5 with nvm.
+**Author:** John Waldron  
+**Host (dev):** Windows 11  
+**Node/npm:** v20.x / npm 10.x
 
-Confirmed working versions:
+These notes explain how to run the app locally, execute tests, see reports/artifacts, and what CI does. This file is the canonical reference for reviewers.
 
-node -v → v20.19.5
+---
 
-npm -v → 10.8.2
+## 1) Project quickstart (local)
+bash # from repo root npm install npm run dev # browse http://localhost:3000
+`
 
-Using nvm inside VS Code terminal now works properly.
+Stop the dev server with **CTRL + C**.
 
-Repo Setup
+> **Local env:** If the backend needs secrets locally, keep them in `../backend/.env` (not tracked in Git). The UI-only smoke tests don’t require real external keys.
 
-Repo cloned from Bitbucket → opened in VS Code.
+---
 
-Key project files:
+## 2) Test commands (local)
 
-package.json (lists dependencies & scripts)
+All commands are run from **repo root**.
 
-tailwind.config.ts (UI styling)
+### 2.1 Playwright — UI smoke
 
-README.md (basic setup instructions)
+Runs the TypeScript specs under `../tests`.
+bash # against a running dev server npm run test:ui
+**Report (HTML):**
 
-Commands identified:
+* Generated at `playwright-report/`
+* Open via: `npx playwright show-report` **or** open `playwright-report/index.html`
 
-npm install → installs dependencies
+### 2.2 API probe — Mocha
 
-npm run dev → starts the app in development mode (usually defaults to http://localhost:3000)
+A tiny liveness check for `GET /`.
+bash npm run test:api
+**Output:** console (no HTML UI). This is intentionally small to keep the app code/deps untouched.
 
-Running the App
+### 2.3 Selenium smoke — Mocha + Chromedriver
 
-Run:
+Validates key UI affordances through Selenium/Chrome.
+bash # optional (Windows): point to Chrome and run visible # PowerShell $env:CHROME_BIN = "C:\Program Files\Google\Chrome\Application\chrome.exe" $env:HEADLESS = "false" npm run test:selenium
+**Artifacts (Selenium):**
 
-npm install
-npm run dev
+* `test-results/chromedriver.log` – verbose Chromedriver log
+* `test-results/*.png` – failure screenshots (captured on test failure)
 
+---
 
-Stop the app with:
+## 3) Reports & artifacts (local)
 
-CTRL + C
+### Playwright (UI)
 
+* **Folder:** `playwright-report/`
+* **Open:** `npx playwright show-report` or open `playwright-report/index.html`
+* **What you’ll see:** Suites → tests → steps, console, network, screenshots, traces (trace on first retry)
 
-(This kills the running process in the terminal.)
+### Selenium (Mocha)
 
-Restart anytime by re-running npm run dev.
+* **Folder:** `test-results/`
+* **Files:** `chromedriver.log`, `*.png` (on failure)
+* **Viewer:** open PNGs directly; logs are plain text
 
+---
 
-________
-2#
-________
-## Setup Notes (Sept 7, 2025)
+## 4) CI overview (GitHub Actions)
 
-- Installed Node.js v20.19.5 using nvm-windows (`nvm install 20`, `nvm use 20`)
-- Verified versions: node v20.19.5, npm 10.8.2
-- Cloned repo: `git clone https://bitbucket.org/web3_technical_team/ethvault.git`
-- Installed dependencies: `npm install` → completed successfully
-- Ran app: `npm run dev`
-  - Backend: “Server running”
-  - Frontend (Next.js 15.2.4): available at http://localhost:3000
-  - First compile took ~20s (noted as performance issue)
-- How to stop app: **CTRL+C** in terminal (confirm with `y` in PowerShell if prompted)
+* **Workflow file:** [`../.github/workflows/ci.yml`](../.github/workflows/ci.yml)
 
-### Initial Observations
-- Navigation links visible: Dashboard, Deposit, Stake, Leaderboard, Governance
-- Balance cards show `NaN` before wallet connect (critical UI/UX bug candidate)
-- “Connect Wallet” button visible but currently not functional without configuring a wallet provider
-- Governance page loads; when no proposals exist, it shows a blank area (potential empty state issue)
-- Initial page load time ~20s (performance issue candidate)
-- No critical security issues spotted yet, but possible concerns: “Approve unlimited” UX, missing input validation, missing error handling.
+* **Runner image:** `mcr.microsoft.com/playwright:v1.47.0-jammy` (browsers + deps preinstalled)
 
-______________
-3#
-______________
+* **What CI does:**
 
-## 2) `RUN_NOTES.md`
-```md
-# RUN NOTES – EthVault (Local)
+  1. `npm ci`
+  2. `npx playwright install --with-deps`
+  3. **Runs Playwright with a CI-only config:**
+     `npx playwright test -c playwright.ci.config.ts`
 
-## Environment
-- Windows 11
-- Node v20.19.5, npm 10.8.2 (via nvm-windows)
+* **CI-only Playwright config:** [`../playwright.ci.config.ts`](../playwright.ci.config.ts)
 
-## App setup (Bitbucket repo, local only)
-- Clone: `git clone https://bitbucket.org/web3_technical_team/ethvault.git`
-- Install: `npm install`
-- Run: `npm run dev` → Next.js at http://localhost:3000, backend "Server running"
-- Stop: CTRL+C in terminal (confirm Y if prompted)
+  * Starts **Next.js only** (`npx next dev -p 3000`) as the web server (avoids backend/env checks for UI smoke)
+  * Ignores Mocha/Selenium files (`*.mjs`) so Playwright doesn’t try to run them
 
-## Observations during run
-- First cold load measured ~20s (`GET / 200 in ~20038ms`)
-- Dashboard/Deposit/Stake/Leaderboard/Governance routes render
-- “NaN” in balance cards before wallet connect
-- “Connect Wallet” produced dev overlay **Unexpected error** (extension layer)
-- Governance appears empty without an explicit empty state
+* **Artifacts uploaded per run (Actions → Artifacts):**
 
-## Known prerequisites not configured
-- Wallet provider / RPC (Holesky) not configured for this PoW run
-- No funding on testnets during this pass
+  * `playwright-report` (HTML)
+  * `test-results` (screenshots, logs, traces)
 
+> **Note:** A separate local config (`../playwright.config.ts`) exists for development. CI **explicitly** uses the CI-only config above.
 
+---
+
+## 5) Traceability (tests ↔ bugs)
+
+* **Test cases:** see `SUBMISSION_JDW_QA_NOTES/TESTCASES.csv`
+* **Bug log:** see `SUBMISSION_JDW_QA_NOTES/BUGS.md`
+
+Failing cases reference their bug IDs in **Notes** (e.g., `TC-003 → BUG-001`, `TC-005 → BUG-004`), so reviewers can jump from a failing test to a detailed repro/expected/actual.
+
+---
+
+## 6) Troubleshooting (local)
+
+### EPERM / file lock on Windows during `npm install`
+
+Kill processes that often hold locks:
+```bash
+taskkill /F /IM node.exe /T 2>$null taskkill /F /IM chrome.exe /T 2>$null taskkill /F /IM chromedriver.exe /T 2>$null
+```
+
+# Then clean and reinstall:
+```bash
+npx rimraf node_modules .next package-lock.json npm cache clean --force npm install
+```
+### Port already in use (3000)
+
+Another Next/dev server is running:
+
+* Stop existing server(s) (CTRL+C in that terminal) or kill the process using the port.
+
+### Selenium can’t find Chrome
+
+Set `CHROME_BIN` explicitly (see 2.3). On Linux CI the workflow uses system Chrome automatically.
+
+---
+
+## 7) Command cheat sheet
+bash # app npm run dev # playwright ui npm run test:ui npx playwright show-report # api probe (mocha) npm run test:api # selenium smoke # (optionally) CHROME_BIN + HEADLESS=false npm run test:selenium
+---
+
+## 8) Files of interest (relative to this file)
+
+* CI workflow: [`../.github/workflows/ci.yml`](../.github/workflows/ci.yml)
+* Playwright CI config: [`../playwright.ci.config.ts`](../playwright.ci.config.ts)
+* Local Playwright config: [`../playwright.config.ts`](../playwright.config.ts)
+* UI specs: [`../tests/ui-smoke.spec.ts`](../tests/ui-smoke.spec.ts), [`../tests/dashboard-preconnect.spec.ts`](../tests/dashboard-preconnect.spec.ts)
+* API probe: [`../tests/api.ping.test.mjs`](../tests/api.ping.test.mjs)
+* Selenium smoke: [`../tests/selenium.smoke.test.mjs`](../tests/selenium.smoke.test.mjs)
