@@ -23,3 +23,11 @@ chromedriver.log
 # OS
 .DS_Store
 Thumbs.db
+
+# Local env & artifacts
+.env*
+backend/.env
+test-results/
+playwright-report/
+chromedriver.log
+

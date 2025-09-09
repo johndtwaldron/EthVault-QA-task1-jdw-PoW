@@ -1,11 +1,55 @@
 // tests/selenium.smoke.test.mjs
+import fs from 'node:fs';
+import path from 'node:path';
 import { Builder, By, until } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome.js';
-import chromedriver from 'chromedriver'; // v140 should be installed
+import chromedriver from 'chromedriver';
 
-const APP_URL = process.env.APP_URL || 'http://localhost:3000';
-const CHROME_BIN = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe';
+// -----------------------------
+// Local/CI config (portable)
+// -----------------------------
+const APP_URL = process.env.APP_URL || 'http://127.0.0.1:3000';
 
+// HEADLESS: default true. Set HEADLESS=false to watch the browser.
+const HEADLESS = (process.env.HEADLESS || 'true').toLowerCase() !== 'false';
+
+// CHROME_BIN: prefer env; otherwise pick a sensible OS default.
+function guessChrome() {
+  if (process.env.CHROME_BIN && fs.existsSync(process.env.CHROME_BIN)) {
+    return process.env.CHROME_BIN;
+  }
+
+  // Windows (64-bit and 32-bit program files)
+  const win64 = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+  const win32 = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe';
+  if (process.platform === 'win32') {
+    if (fs.existsSync(win64)) return win64;
+    if (fs.existsSync(win32)) return win32;
+  }
+
+  // macOS
+  const mac = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+  if (process.platform === 'darwin' && fs.existsSync(mac)) return mac;
+
+  // Linux (common paths)
+  const linux = ['/usr/bin/google-chrome', '/usr/bin/chromium-browser', '/usr/bin/chromium'];
+  for (const p of linux) {
+    if (fs.existsSync(p)) return p;
+  }
+
+  // Let Selenium try to find Chrome if none matched
+  return null;
+}
+
+const CHROME_BIN = guessChrome();
+
+// Ensure artifacts dir exists for logs/screens
+const ARTIFACTS = path.join(process.cwd(), 'test-results');
+fs.mkdirSync(ARTIFACTS, { recursive: true });
+
+// -----------------------------
+// Test suite
+// -----------------------------
 describe('ETHVault – Selenium smoke', function () {
   this.timeout(120_000);
   let driver;
@@ -13,33 +57,35 @@ describe('ETHVault – Selenium smoke', function () {
   before(async function () {
     // Route ChromeDriver logs to a file so we can inspect if it hangs
     const service = new chrome.ServiceBuilder(chromedriver.path)
-      .loggingTo('chromedriver.log')
+      .loggingTo(path.join(ARTIFACTS, 'chromedriver.log'))
       .enableVerboseLogging();
 
-    const options = new chrome.Options()
-      .setChromeBinaryPath(CHROME_BIN)
-      .addArguments('--headless=new', '--no-sandbox', '--disable-dev-shm-usage', '--window-size=1366,900');
+    const options = new chrome.Options();
+    if (CHROME_BIN) options.setChromeBinaryPath(CHROME_BIN);
+    options.addArguments('--no-sandbox', '--disable-dev-shm-usage', '--window-size=1366,900');
+    if (HEADLESS) options.addArguments('--headless=new');
 
-    console.log('[Selenium] building driver…');
     driver = await new Builder()
       .forBrowser('chrome')
-      .setChromeService(service)   // <- force npm chromedriver@140
-      .setChromeOptions(options)   // <- force your Chrome binary
+      .setChromeService(service)   // use npm chromedriver (v140)
+      .setChromeOptions(options)   // local Chrome, if found
       .build();
 
-    const session = await driver.getSession();
-    console.log('[Selenium] session:', session?.getId?.());
-
-    console.log('[Selenium] navigating to', APP_URL);
     await driver.get(APP_URL);
-
-    console.log('[Selenium] waiting for base shell…');
     await driver.wait(until.elementLocated(By.css('header, nav, main')), 60_000);
-    console.log('[Selenium] base shell located');
   });
 
   after(async function () {
     if (driver) await driver.quit();
+  });
+
+  // Optional: on failure, save a screenshot to test-results
+  afterEach(async function () {
+    if (this.currentTest?.state === 'failed' && driver) {
+      const png = await driver.takeScreenshot();
+      const name = this.currentTest.title.replace(/[^\w.-]+/g, '_') + '.png';
+      fs.writeFileSync(path.join(ARTIFACTS, name), png, 'base64');
+    }
   });
 
   it('shows Connect Wallet', async function () {
