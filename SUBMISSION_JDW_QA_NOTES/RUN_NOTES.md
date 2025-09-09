@@ -125,14 +125,7 @@ Set `CHROME_BIN` explicitly (see 2.3). On Linux CI the workflow uses system Chro
 
 ---
 
-## 7) Command cheat sheet
-```bash
- # app npm run dev # playwright ui npm run test:ui npx playwright show-report # api probe (mocha) npm run test:api # selenium smoke # (optionally) CHROME_BIN + HEADLESS=false
-npm run test:selenium
-```bash
----
-
-## 8) Files of interest (relative to this file)
+## 7) Files of interest (relative to this file)
 
 * CI workflow: [`../.github/workflows/ci.yml`](../.github/workflows/ci.yml)
 * Playwright CI config: [`../playwright.ci.config.ts`](../playwright.ci.config.ts)
